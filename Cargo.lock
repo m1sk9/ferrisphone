@@ -321,6 +321,7 @@ dependencies = [
  "dotenvy",
  "serde",
  "serenity",
+ "tempfile",
  "tokio",
  "toml",
  "tracing",
