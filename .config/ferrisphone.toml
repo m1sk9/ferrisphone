@@ -1,0 +1,21 @@
+[general]
+debug = false
+logging = false
+memory = true
+mods = []
+
+[context]
+max_chat_context = 500
+max_oneline_context = 1000
+
+[model]
+claude = ["haiku", "sonnet"]
+chatgpt = ["gpt-4.5"]
+inception = [""]
+gemini = [""]
+
+[system_prompt]
+claude = ""
+chatgpt = ""
+inception = ""
+gemini = ""
