@@ -2,5 +2,17 @@
 name = "ferrisphone"
 version = "0.0.0"
 edition = "2024"
+repository = "https://github.com/m1sk9/ferrisphone"
+readme = "README.md"
+license = "Apache-2.0"
+description = "A personal Discord chat bot with multiple LLM backends, written in Rust."
 
 [dependencies]
+anyhow = "1.0.102"
+dotenvy = "0.15.7"
+serde = { version = "1.0.228", features = ["derive"] }
+serenity = { version = "0.12.5", features = ["client", "gateway", "model"] }
+tokio = { version = "1.50.0", features = ["full"] }
+toml = "1.0.6"
+tracing = "0.1.44"
+tracing-subscriber = "0.3.22"
