@@ -126,6 +126,33 @@ mod tests {
     }
 
     #[tokio::test]
+    async fn load_returns_error_on_invalid_json() {
+        let dir = tempfile::tempdir().unwrap();
+        let path = dir.path().join("invalid.json");
+        tokio::fs::write(&path, "not valid json {{{").await.unwrap();
+
+        let result: anyhow::Result<JsonStore<HashMap<String, String>>> =
+            JsonStore::load(&path).await;
+        assert!(result.is_err());
+    }
+
+    #[tokio::test]
+    async fn flush_creates_parent_directories() {
+        let dir = tempfile::tempdir().unwrap();
+        let path = dir.path().join("nested").join("dir").join("data.json");
+
+        let store: JsonStore<HashMap<String, String>> = JsonStore::load(&path).await.unwrap();
+        store
+            .write(|data| {
+                data.insert("key".to_string(), "val".to_string());
+            })
+            .await
+            .unwrap();
+
+        assert!(path.exists());
+    }
+
+    #[tokio::test]
     async fn reload_after_write_returns_same_data() {
         let dir = tempfile::tempdir().unwrap();
         let path = dir.path().join("reload.json");
