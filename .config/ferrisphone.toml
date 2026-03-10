@@ -2,7 +2,6 @@
 debug = false
 logging = false
 memory = true
-mods = []
 
 [context]
 max_chat_context = 500
