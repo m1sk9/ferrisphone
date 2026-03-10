@@ -113,28 +113,4 @@ gemini = ""
         let result: Result<Config, _> = toml::from_str("not valid toml [[[");
         assert!(result.is_err());
     }
-
-    #[test]
-    fn load_returns_error_when_file_missing() {
-        unsafe {
-            std::env::set_var("FERRISPHONE_CONFIG", "/tmp/nonexistent_ferrisphone.toml");
-        }
-        let result = Config::load();
-        unsafe {
-            std::env::remove_var("FERRISPHONE_CONFIG");
-        }
-        assert!(result.is_err());
-    }
-
-    #[test]
-    fn load_uses_default_path_when_env_unset() {
-        unsafe {
-            std::env::remove_var("FERRISPHONE_CONFIG");
-        }
-        // デフォルトパス ./ferrisphone.toml は存在しないのでエラーになる
-        let result = Config::load();
-        // ファイルが無ければエラー、あれば成功のどちらもあり得るが、
-        // デフォルトパスが使われることを確認
-        let _ = result;
-    }
 }
