@@ -14,7 +14,6 @@ pub struct GeneralConfig {
     pub debug: bool,
     pub logging: bool,
     pub memory: bool,
-    pub mods: Vec<u64>,
 }
 
 #[derive(Debug, Deserialize)]
@@ -61,7 +60,6 @@ mod tests {
 debug = true
 logging = false
 memory = true
-mods = [123, 456]
 
 [context]
 max_chat_context = 500
@@ -87,7 +85,6 @@ gemini = ""
         assert!(config.general.debug);
         assert!(!config.general.logging);
         assert!(config.general.memory);
-        assert_eq!(config.general.mods, vec![123, 456]);
         assert_eq!(config.context.max_chat_context, 500);
         assert_eq!(config.context.max_oneline_context, 1000);
         assert_eq!(config.model.claude, vec!["haiku", "sonnet"]);
